@@ -19,12 +19,21 @@ void test_full_house_row(void)
   Board board = "2.7.......8..9.....3.6..8....8.649..6927853.4..132.5....9..1.2.....4..9.......4.8";
   size_t pos;
   bool res = full_house_p(board, &pos);
-  assert(res);
+  assert(res && pos == 43);
+}
+
+void test_full_house_col(void)
+{
+  Board board = "2.7......18..9....3..6..8..8...649..6.......44..32.5..9....1.2.....4..9.5.....4.8";
+  size_t pos;
+  bool res = full_house_p(board, &pos);
+  assert(res && pos == 63);
 }
 
 int main(void)
 {
   test_full_house_square();
   test_full_house_row();
+  test_full_house_col();
   return 0;
 }
