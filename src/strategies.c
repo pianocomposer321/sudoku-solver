@@ -52,8 +52,8 @@ bool full_house_p(Board board, size_t *pos)
     size_t empty_cell_col = 0;
 
     bool quit = false;
-    for (size_t col = 0; col < BOARD_STRIDE; col++) {
-      char c = board_at(board, row, col);
+    for (size_t cell = 0; cell < BOARD_STRIDE; cell++) {
+      char c = board_at(board, row, cell);
 
       if (isdigit(c))
         found_digits[c - '0' - 1] = true;
@@ -63,7 +63,7 @@ bool full_house_p(Board board, size_t *pos)
           break;
         }
         found_empty_cell = true;
-        empty_cell_col = col;
+        empty_cell_col = cell;
       }
     }
 
@@ -72,8 +72,9 @@ bool full_house_p(Board board, size_t *pos)
     if (found_empty_cell) {
       for (size_t i = 0; i < BOARD_STRIDE; i++) {
         if (!found_digits[i]) {
-          size_t pos_ = board_at(board, row, empty_cell_col);
-          board[pos_] = i + '0' + 1;
+          // size_t pos_ = board_at(board, row, empty_cell_col);
+          size_t pos_ = IND(row, empty_cell_col);
+          board[pos_] = i + '1';
           if (pos != NULL) {
             *pos = pos_;
           }
